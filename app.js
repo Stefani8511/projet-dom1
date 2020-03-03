@@ -129,25 +129,35 @@ lienGoogle.addEventListener('click', function(e){
 
 const form = document.querySelector('#course-form')
 ,            listeTache = document.querySelector('.collection')
-,            supprimerliste = document.querySelector('.supprimer-course')
-,            contenuTache = document.querySelector('#contenuTache');
+,            supprimerListe = document.querySelector('.supprimer-course')
+,            contenuTache = document.querySelector('#contenuTache')
+,            filtrer = document.querySelector("#filter");
 
 //APPLICATION 
-malistedeTache()
+maListeDeTache()
 
-function malistedeTache(){
+function maListeDeTache(){
 //Ajouter un évènement
-    form.addEventListener('submit', ajouteruneTache);
+    form.addEventListener('submit', ajouterUneTache);
 
  //Supprimer une tache
-    listeTache.addEventListener('click', supprimeruneTache);
+    listeTache.addEventListener('click', supprimerUneTache);
  
+ //Nettoyer la liste de taches  
+    supprimerListe.addEventListener('click', nettoyerLaListe);
+
+
+//Filtrer les tâches
+    filtrer.addEventListener('keyup', filtrerLesTaches);
+
 }
+
+
 
 //Ajouter une tache
 
 
-function ajouteruneTache(e){
+function ajouterUneTache(e){
     if (contenuTache.value ===''){
         alert ('Ajouter une tâche')
     }
@@ -185,11 +195,36 @@ contenuTache.value = '';
 //Supprimer une tache
 
 
-function supprimeruneTache(e){
-    if (e.target.parentElement.classList.contains('delete-items')){
+function supprimerUneTache(e){
+    if (e.target.parentElement.classList.contains('delete-item')){
+        if(confirm('Voulez-vous vraiment supprimer ?'))
         e.target.parentElement.parentElement.remove();
-
+        
     }
 }
 
+//Nettoyer la liste de tâches
 
+function nettoyerLaListe(){
+    listeTache.innerHTML = ''
+}
+
+//Filter
+
+function filtrerLesTaches(e){
+   const contenuClavier = e.target.value.toLowerCase()
+
+    document.querySelectorAll('.collection-item').forEach(
+        function(tache){
+            const motCle = tache.firstChild.textContent;
+            if (motCle.toLocaleLowerCase().indexOf(contenuClavier) !=-1){
+                tache.getElementsByClassName.display ='block'
+            }else{
+                tache.style.display = 'none'
+            }
+        }
+    );
+
+   console.log(contenuClavier);
+   
+}
