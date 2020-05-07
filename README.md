@@ -1,2 +1,1 @@
-# projet-dom1
- 
+création d'une calculatrice simple
