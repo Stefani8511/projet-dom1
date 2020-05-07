@@ -1,1 +1,1 @@
-création d'une calculatrice simple
+création d'une calculatrice simple JS
